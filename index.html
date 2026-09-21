@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090c0a">
+<title>Baba da Terça</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--bg:#090c0a;--card:#111512;--card2:#171c18;--line:#252c27;--text:#f4f7f5;--muted:#8f9992;--green:#baff3b;--green2:#93d51f;--red:#ff7676;--yellow:#ffd166;--max:760px;--r:22px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 88% -6%,rgba(186,255,59,.13),transparent 28%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}button,input,select{font:inherit}button{cursor:pointer}.hide{display:none!important}
+.shell{width:min(100% - 24px,var(--max));margin:auto;padding:16px 0 110px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.brand{display:flex;align-items:center;gap:11px}.logo{width:44px;height:44px;border-radius:14px;background:var(--green);color:#0a0d0b;display:grid;place-items:center;font-weight:1000;transform:rotate(-4deg)}.brand strong{display:block;letter-spacing:-.02em}.brand small{color:var(--muted)}.ghost{border:1px solid var(--line);background:#0d110e;color:var(--text);border-radius:999px;padding:9px 12px}
+.hero,.card{border:1px solid var(--line);background:var(--card);border-radius:28px;padding:22px}.card{margin-top:14px;border-radius:var(--r);padding:18px}.eyebrow{font-size:11px;letter-spacing:.15em;font-weight:900;color:var(--green);text-transform:uppercase}h1{font-size:clamp(34px,8vw,56px);line-height:.96;letter-spacing:-.055em;margin:12px 0}.lead{color:var(--muted);line-height:1.5;margin:0}.meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:17px}.pill{border:1px solid var(--line);background:#0d110e;padding:8px 11px;border-radius:999px;font-size:12px}.pill b{color:var(--green)}
+.title{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:14px}.title h2{font-size:19px;margin:0;letter-spacing:-.025em}.title p{font-size:12px;color:var(--muted);margin:4px 0 0}.count{font-size:28px;color:var(--green);font-weight:950;letter-spacing:-.04em}.stack{display:grid;gap:10px}.row{display:grid;grid-template-columns:1fr 1fr;gap:9px}.field{display:grid;gap:6px}.field label{font-size:11px;color:var(--muted);font-weight:800}.field input,.field select{width:100%;background:#0d110e;color:var(--text);border:1px solid var(--line);border-radius:13px;padding:12px 13px;outline:none}.field input:focus,.field select:focus{border-color:#61763b}
+.status-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.status{min-height:54px;border:1px solid var(--line);border-radius:16px;background:var(--card2);color:var(--text);font-weight:900}.status.active.yes{background:var(--green);color:#0a0d0b;border-color:var(--green)}.status.active.no{background:#2a1718;color:#ffc0c0;border-color:#643136}.status:disabled{opacity:.4;cursor:not-allowed}.primary,.secondary{width:100%;border-radius:16px;padding:14px 16px;font-weight:950}.primary{border:0;background:var(--green);color:#0a0d0b}.secondary{border:1px solid var(--line);background:var(--card2);color:var(--text)}.primary:disabled,.secondary:disabled{opacity:.4;cursor:not-allowed}.smallbtn{border:1px solid var(--line);background:#0e120f;color:var(--text);border-radius:10px;padding:7px 9px;font-size:10px;font-weight:800}
+.switchline{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px;border:1px solid var(--line);border-radius:14px;background:#0d110e}.switchline strong{font-size:13px}.switchline small{display:block;color:var(--muted);margin-top:2px}.switch{width:48px;height:28px;border-radius:999px;border:0;background:#303731;padding:3px;position:relative;transition:.2s}.switch:after{content:"";width:22px;height:22px;border-radius:50%;background:#fff;display:block;transition:.2s}.switch.on{background:var(--green)}.switch.on:after{transform:translateX(20px);background:#0a0d0b}
+.notice{border:1px solid #4c4328;background:#1c180f;color:#e8d99b;padding:11px 13px;border-radius:13px;font-size:12px;line-height:1.45}.success{border-color:#334b23;background:#121a0e;color:#d5f7a8}.list{display:grid;gap:8px}.person{display:flex;align-items:center;justify-content:space-between;gap:11px;border:1px solid var(--line);background:var(--card2);border-radius:14px;padding:10px 11px}.pmain{display:flex;align-items:center;gap:10px;min-width:0}.pos{width:27px;height:27px;border-radius:9px;background:#0d110e;color:var(--muted);display:grid;place-items:center;font-size:11px;font-weight:900;flex:none}.avatar{width:35px;height:35px;border-radius:50%;background:#252d27;color:var(--green);display:grid;place-items:center;font-weight:900;flex:none}.name{font-weight:760;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sub{font-size:10px;color:var(--muted);margin-top:2px}.tag{font-size:10px;border-radius:999px;padding:5px 7px;background:#252b27;color:#aab1ac;white-space:nowrap}.tag.guest{background:#342d16;color:#ffe79b}.tag.wait{background:#2a2415;color:#e9d696}.empty{border:1px dashed #343c36;padding:17px;border-radius:14px;color:var(--muted);text-align:center;font-size:13px}
+.teams{display:grid;gap:10px}.team{border:1px solid var(--line);background:var(--card2);border-radius:17px;padding:14px}.teamhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.teamhead strong{font-size:12px;letter-spacing:.11em}.teamgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.chip{background:#0e120f;border:1px solid #252b27;border-radius:11px;padding:10px;font-size:12px}.chip small{display:block;color:var(--muted);margin-top:2px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{border:1px solid var(--line);background:var(--card2);border-radius:17px;padding:15px}.stat b{display:block;font-size:28px;color:var(--green);letter-spacing:-.04em}.stat span{font-size:11px;color:var(--muted)}.progress{height:10px;background:#252b27;border-radius:999px;overflow:hidden;margin-top:10px}.progress i{display:block;height:100%;background:var(--green);width:0;border-radius:inherit}
+.nav{position:fixed;left:50%;bottom:max(12px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(calc(100% - 20px),720px);display:grid;grid-template-columns:repeat(4,1fr);gap:5px;background:rgba(13,17,14,.94);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;padding:6px;z-index:15}.nav.adminnav{grid-template-columns:repeat(5,1fr)}.navbtn{border:0;background:transparent;color:#727d75;border-radius:15px;padding:10px 5px;font-size:10px;font-weight:800}.navbtn b{display:block;font-size:17px;line-height:1.1;margin-bottom:3px}.navbtn.active{background:var(--card2);color:var(--text)}
+.view{display:none}.view.active{display:block}.adminbox{border:1px solid var(--line);border-radius:16px;padding:13px;background:#0d110e}.adminlist{display:grid;gap:8px;max-height:420px;overflow:auto}.adminrow{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--line);background:var(--card2);border-radius:13px;padding:10px}.admin-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}details{border:1px solid var(--line);border-radius:14px;padding:12px;background:#0d110e}summary{cursor:pointer;font-weight:850;font-size:13px}
+.auth{min-height:100vh;display:grid;place-items:center;padding:20px}.authcard{width:min(100%,440px);border:1px solid var(--line);background:var(--card);border-radius:28px;padding:24px}.tabs{display:grid;grid-template-columns:1fr 1fr;background:#0d110e;padding:4px;border-radius:13px;margin:20px 0}.tab{border:0;background:transparent;color:var(--muted);padding:10px;border-radius:10px;font-weight:850}.tab.active{background:var(--card2);color:var(--text)}.demo-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.demo-banner{border:1px solid #4b4227;background:#1b170e;color:#dfd09a;padding:10px 12px;border-radius:13px;font-size:11px;line-height:1.4;margin-bottom:12px}.toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%) translateY(15px);opacity:0;pointer-events:none;transition:.2s;background:#f5f7f5;color:#0b0e0c;padding:11px 14px;border-radius:999px;font-weight:850;font-size:12px;z-index:30;max-width:calc(100% - 30px);text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:560px){.shell{width:min(100% - 18px,var(--max));padding-top:10px}.hero{padding:19px}.card{padding:15px}.row,.teamgrid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.navbtn{font-size:9px}.navbtn b{font-size:16px}}
+</style>
+</head>
+<body>
+
+<div id="authView" class="auth hide">
+  <div class="authcard">
+    <div class="brand"><div class="logo">B</div><div><strong>Baba da Terça</strong><small>terça · 19h</small></div></div>
+    <h1>Seu baba,<br>sem bagunça.</h1>
+    <p class="lead">Cadastre-se uma vez. Toda terça você confirma se vai, informa seu visitante e acompanha a lista e o sorteio.</p>
+    <div class="tabs"><button id="loginTab" class="tab active">Entrar</button><button id="signupTab" class="tab">Criar cadastro</button></div>
+    <form id="authForm" class="stack">
+      <div id="nameField" class="field hide"><label>SEU NOME</label><input id="nameInput" autocomplete="name" placeholder="Ex.: Humberto Lima"></div>
+      <div class="field"><label>E-MAIL</label><input id="emailInput" type="email" required autocomplete="email" placeholder="voce@email.com"></div>
+      <div class="field"><label>SENHA</label><input id="passwordInput" type="password" minlength="6" required autocomplete="current-password" placeholder="mínimo 6 caracteres"></div>
+      <button id="authSubmit" class="primary">ENTRAR</button>
+    </form>
+    <div id="demoBox" class="hide">
+      <div class="demo-banner" style="margin-top:14px">Modo demo ativo. Use uma das contas abaixo para testar sem configurar o Supabase.</div>
+      <div class="demo-actions"><button id="demoPlayerBtn" class="secondary">JOGADOR DEMO</button><button id="demoAdminBtn" class="secondary">ADMIN DEMO</button></div>
+    </div>
+  </div>
+</div>
+
+<main id="appView" class="shell hide">
+  <header class="top">
+    <div class="brand"><div class="logo">B</div><div><strong>Baba da Terça</strong><small id="userLabel">—</small></div></div>
+    <button id="logoutBtn" class="ghost">Sair</button>
+  </header>
+
+  <section id="view-baba" class="view active">
+    <div class="hero">
+      <div id="roundStatus" class="eyebrow">PRÓXIMO BABA</div>
+      <h1 id="roundTitle">Terça, 19h</h1>
+      <p id="roundSubtitle" class="lead">Confirme sua presença quando a lista abrir.</p>
+      <div class="meta"><div id="roundDate" class="pill">—</div><div class="pill"><b id="mainCount">0</b>/20 vagas</div><div id="waitPill" class="pill">0 aguardando</div></div>
+    </div>
+
+    <div class="card">
+      <div class="title"><div><h2>Vai pro baba?</h2><p>Seu nome já vem do cadastro.</p></div></div>
+      <div class="status-actions"><button id="goingBtn" class="status yes">VOU</button><button id="notGoingBtn" class="status no">NÃO VOU</button></div>
+      <div id="guestArea" class="stack hide" style="margin-top:10px">
+        <div class="switchline"><div><strong>Vai levar visitante?</strong><small>O visitante entra depois dos jogadores cadastrados.</small></div><button id="guestSwitch" type="button" class="switch" aria-label="Levar visitante"></button></div>
+        <div id="guestNameField" class="field hide"><label>NOME DO VISITANTE</label><input id="guestNameInput" placeholder="Ex.: Gabriel"></div>
+      </div>
+      <div id="confirmNotice" class="notice hide" style="margin-top:10px"></div>
+      <button id="saveAttendanceBtn" class="primary" style="margin-top:10px">CONFIRMAR</button>
+    </div>
+
+    <div class="card">
+      <div class="title"><div><h2>Sua situação</h2><p id="myStatusText">Você ainda não confirmou.</p></div></div>
+      <div id="myStatusBox" class="notice">Quando confirmar, mostramos aqui se você está entre os 20 ou aguardando vaga.</div>
+    </div>
+  </section>
+
+  <section id="view-lista" class="view">
+    <div class="hero"><div class="eyebrow">LISTA DO BABA</div><h1>Quem vai<br>jogar.</h1><p class="lead">Só aparecem as pessoas confirmadas para esta terça.</p></div>
+    <div class="card"><div class="title"><div><h2>Lista principal</h2><p>20 vagas · 5 times de 4.</p></div><div id="mainCountBig" class="count">0</div></div><div id="mainList" class="list"></div></div>
+    <div id="waitSection" class="card hide"><div class="title"><div><h2>Aguardando vaga</h2><p>Excedentes primeiro; visitantes depois.</p></div><div id="waitCountBig" class="count">0</div></div><div id="waitList" class="list"></div></div>
+  </section>
+
+  <section id="view-times" class="view">
+    <div class="hero"><div class="eyebrow">SORTEIO</div><h1>5 times.<br>4 por time.</h1><p class="lead">Assim que o admin fizer o sorteio, ele aparece aqui para todo mundo.</p></div>
+    <div class="card"><div class="title"><div><h2>Times da terça</h2><p id="drawInfo">O sorteio ainda não foi realizado.</p></div></div><div id="teamsList" class="teams"></div></div>
+  </section>
+
+  <section id="view-perfil" class="view">
+    <div class="hero"><div class="eyebrow">MEU PERFIL</div><h1 id="profileName">—</h1><p class="lead">Seu histórico de presença nos babas já contabilizados.</p></div>
+    <div class="card">
+      <div class="title"><div><h2>Taxa de comparecimento</h2><p>Considera babas em que você teve vaga na lista principal e o admin marcou a presença.</p></div></div>
+      <div class="stats"><div class="stat"><b id="attendanceRate">—</b><span>taxa de presença</span><div class="progress"><i id="attendanceProgress"></i></div></div><div class="stat"><b id="attendedCount">0</b><span>comparecimentos</span></div></div>
+      <div class="stats" style="margin-top:10px"><div class="stat"><b id="eligibleCount">0</b><span>babas contabilizados</span></div><div class="stat"><b id="missedCount">0</b><span>faltas</span></div></div>
+    </div>
+  </section>
+
+  <section id="view-admin" class="view">
+    <div class="hero"><div class="eyebrow">ADMIN</div><h1>Controle do<br>baba.</h1><p class="lead">As regras internas só aparecem aqui.</p></div>
+    <div class="card stack">
+      <div class="title"><div><h2>Próxima terça</h2><p>O baba é sempre às 19h.</p></div></div>
+      <div class="row"><div class="field"><label>ABERTURA DA CONFIRMAÇÃO</label><select id="openHour"><option value="07:00">07:00</option><option value="12:00">12:00</option></select></div><div class="field"><label>FECHAMENTO DA LISTA</label><select id="closeHour"><option value="17:00">17:00</option><option value="18:00">18:00</option><option value="18:30">18:30</option></select></div></div>
+      <button id="createNextRoundBtn" class="secondary">CRIAR PRÓXIMA TERÇA · 19H</button>
+      <button id="finalizeRosterBtn" class="secondary">DEFINIR / ATUALIZAR LISTA DE 20</button>
+      <button id="drawBtn" class="primary">SORTEAR 5 TIMES</button>
+    </div>
+
+    <div class="card">
+      <details><summary>Regras internas de separação</summary><p class="lead" style="font-size:12px;margin:10px 0">Somente o admin enxerga esta definição. Jogadores comuns não têm acesso à tabela.</p><div id="adminPlayers" class="adminlist"></div></details>
+    </div>
+
+    <div class="card">
+      <details open><summary>Marcar comparecimento do último baba</summary><p class="lead" style="font-size:12px;margin:10px 0">Depois do baba, marque quem realmente compareceu. Isso alimenta a taxa do perfil.</p><div id="checkinList" class="adminlist"></div></details>
+    </div>
+  </section>
+</main>
+
+<nav id="bottomNav" class="nav hide">
+  <button class="navbtn active" data-view="baba"><b>⚽</b>Baba</button>
+  <button class="navbtn" data-view="lista"><b>☷</b>Lista</button>
+  <button class="navbtn" data-view="times"><b>⌘</b>Times</button>
+  <button class="navbtn" data-view="perfil"><b>◉</b>Perfil</button>
+  <button id="adminNavBtn" class="navbtn hide" data-view="admin"><b>⚙</b>Admin</button>
+</nav>
+<div id="toast" class="toast"></div>
+
+<script>
+/* ==================== CONFIG ==================== */
+const SUPABASE_URL = "YOUR_SUPABASE_URL";
+const SUPABASE_PUBLISHABLE_KEY = "YOUR_SUPABASE_PUBLISHABLE_KEY";
+const DEMO_MODE = SUPABASE_URL.includes("YOUR_") || SUPABASE_PUBLISHABLE_KEY.includes("YOUR_");
+const sb = DEMO_MODE ? null : window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+const $ = id=>document.getElementById(id);
+let authMode="login", currentUser=null, profile=null, currentRound=null, players=[], attendance=[], privateRules=[], draw=null, roster=[], profileStats={attended:0,eligible:0};
+let draftStatus="going", draftGuest=false;
+
+function toast(msg){const t=$("toast");t.textContent=msg;t.classList.add("show");clearTimeout(window.__tt);window.__tt=setTimeout(()=>t.classList.remove("show"),2600)}
+function esc(s=""){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+function initials(name=""){return name.trim().split(/\s+/).slice(0,2).map(x=>x[0]||"").join("").toUpperCase()}
+function pairKey(a,b){return[a,b].sort().join("|")}
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function fmtDate(date){if(!date)return"—";return new Intl.DateTimeFormat("pt-BR",{weekday:"long",day:"2-digit",month:"2-digit"}).format(new Date(date+"T12:00:00"))}
+function dtBR(date,time){return new Date(`${date}T${time}:00-03:00`)}
+function nextTuesdayISO(){const d=new Date();const day=d.getDay();let add=(2-day+7)%7;if(add===0 && d.getHours()>=19)add=7;d.setDate(d.getDate()+add);return d.toISOString().slice(0,10)}
+function isWindowOpen(){if(!currentRound)return false;const now=new Date();return currentRound.status==="open" && now>=new Date(currentRound.opens_at) && now<=new Date(currentRound.closes_at)}
+function ruleFor(id){return privateRules.find(r=>r.player_id===id)?.separated===true}
+
+/* ==================== DEMO ==================== */
+function seedDemo(){
+  const names=["Humberto","João","Pedro","Lucas","Carlos","Rafael","Bruno","Matheus","Diego","Felipe","André","Gustavo","Marcelo","Vitor","Caio","Renan","Thiago","Leandro","Igor","Daniel","Arthur","Henrique","Davi","Eduardo","Murilo","Samuel"];
+  players=names.map((name,i)=>({id:`p${i+1}`,name,email:`p${i+1}@demo.com`,is_admin:i===0,active:true}));
+  privateRules=players.slice(0,5).map(p=>({player_id:p.id,separated:true}));
+  const date=nextTuesdayISO();currentRound={id:"r-demo",title:"Baba da Terça",event_date:date,event_time:"19:00",opens_at:dtBR(date,"07:00").toISOString(),closes_at:dtBR(date,"18:00").toISOString(),status:"open",capacity:20};
+  attendance=players.slice(0,19).map((p,i)=>({round_id:currentRound.id,player_id:p.id,status:"going",confirmed_at:new Date(Date.now()+i*1000).toISOString(),bringing_guest:i===3,guest_name:i===3?"Juninho":null}));
+  draw=null;roster=[];profileStats={attended:8,eligible:10};
+}
+function demoLogin(admin){seedDemo();profile=admin?players[0]:players[5];currentUser={id:profile.id,email:profile.email};showApp();renderAll()}
+
+/* ==================== AUTH ==================== */
+$("loginTab").onclick=()=>setAuthMode("login");$("signupTab").onclick=()=>setAuthMode("signup");
+function setAuthMode(mode){authMode=mode;$("loginTab").classList.toggle("active",mode==="login");$("signupTab").classList.toggle("active",mode==="signup");$("nameField").classList.toggle("hide",mode!=="signup");$("authSubmit").textContent=mode==="login"?"ENTRAR":"CRIAR MEU CADASTRO"}
+$("demoPlayerBtn").onclick=()=>demoLogin(false);$("demoAdminBtn").onclick=()=>demoLogin(true);
+$("authForm").addEventListener("submit",async e=>{e.preventDefault();if(DEMO_MODE){toast("Use Jogador demo ou Admin demo para testar.");return}const email=$("emailInput").value.trim(),password=$("passwordInput").value,name=$("nameInput").value.trim();try{$("authSubmit").disabled=true;if(authMode==="signup"){if(!name)throw new Error("Digite seu nome.");const{data,error}=await sb.auth.signUp({email,password,options:{data:{full_name:name}}});if(error)throw error;if(!data.session){toast("Cadastro criado. Confirme o e-mail para entrar.");return}currentUser=data.user}else{const{data,error}=await sb.auth.signInWithPassword({email,password});if(error)throw error;currentUser=data.user}await loadAppData();showApp();renderAll()}catch(err){toast(err.message||"Não foi possível entrar.")}finally{$("authSubmit").disabled=false}});
+$("logoutBtn").onclick=async()=>{if(DEMO_MODE){showAuth();return}await sb.auth.signOut();showAuth()};
+function showAuth(){$("authView").classList.remove("hide");$("appView").classList.add("hide");$("bottomNav").classList.add("hide")}
+function showApp(){$("authView").classList.add("hide");$("appView").classList.remove("hide");$("bottomNav").classList.remove("hide");$("adminNavBtn").classList.toggle("hide",!profile?.is_admin);$("bottomNav").classList.toggle("adminnav",!!profile?.is_admin)}
+
+/* ==================== DATA ==================== */
+async function loadAppData(){
+  const[{data:p,error:pe},{data:ps,error:pse},{data:rs,error:re}]=await Promise.all([
+    sb.from("profiles").select("*").eq("id",currentUser.id).single(),
+    sb.from("profiles").select("id,name,email,is_admin,active").eq("active",true).order("name"),
+    sb.from("rounds").select("*").order("event_date",{ascending:false}).limit(1)
+  ]);if(pe)throw pe;if(pse)throw pse;if(re)throw re;profile=p;players=ps||[];currentRound=rs?.[0]||null;attendance=[];draw=null;roster=[];privateRules=[];
+  if(currentRound){const[{data:a,error:ae},{data:d,error:de},{data:rr,error:rre}]=await Promise.all([sb.from("attendance").select("*").eq("round_id",currentRound.id),sb.from("draws").select("*").eq("round_id",currentRound.id).order("created_at",{ascending:false}).limit(1),sb.from("round_roster").select("*").eq("round_id",currentRound.id).order("position")]);if(ae)throw ae;if(de)throw de;if(rre)throw rre;attendance=a||[];draw=d?.[0]||null;roster=rr||[];if(draw)await loadDraw(draw.id)}
+  if(profile.is_admin){const{data,error}=await sb.from("private_player_rules").select("*");if(error)throw error;privateRules=data||[]}
+  await loadProfileStats();
+}
+async function loadProfileStats(){if(DEMO_MODE)return;const{data,error}=await sb.from("round_roster").select("attended").eq("player_id",profile.id).eq("roster_status","main").not("attended","is",null);if(error){console.warn(error);profileStats={attended:0,eligible:0};return}profileStats={eligible:data.length,attended:data.filter(x=>x.attended===true).length}}
+async function loadDraw(id){const{data:ts,error:te}=await sb.from("teams").select("*").eq("draw_id",id).order("team_number");if(te)throw te;const ids=(ts||[]).map(t=>t.id);let members=[];if(ids.length){const{data,error}=await sb.from("team_members").select("*").in("team_id",ids);if(error)throw error;members=data||[]}draw={...draw,teams:(ts||[]).map(t=>members.filter(m=>m.team_id===t.id).map(m=>({name:m.display_name,player_id:m.player_id,kind:m.member_type,host_player_id:m.host_player_id})))}}
+
+/* ==================== NAV ==================== */
+document.querySelectorAll(".navbtn").forEach(btn=>btn.onclick=()=>switchView(btn.dataset.view));
+function switchView(name){if(name==="admin"&&!profile?.is_admin)return;document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));$(`view-${name}`).classList.add("active");document.querySelectorAll(".navbtn").forEach(b=>b.classList.toggle("active",b.dataset.view===name));window.scrollTo({top:0,behavior:"smooth"});if(name==="perfil")renderProfile();if(name==="admin")renderAdmin()}
+
+/* ==================== ATTENDANCE ==================== */
+$("goingBtn").onclick=()=>{draftStatus="going";renderAttendanceForm()};$("notGoingBtn").onclick=()=>{draftStatus="not_going";draftGuest=false;renderAttendanceForm()};$("guestSwitch").onclick=()=>{draftGuest=!draftGuest;renderAttendanceForm()};
+function myAttendance(){return attendance.find(a=>a.player_id===profile?.id)}
+function renderAttendanceForm(){const existing=myAttendance();$("goingBtn").classList.toggle("active",draftStatus==="going");$("notGoingBtn").classList.toggle("active",draftStatus==="not_going");$("guestArea").classList.toggle("hide",draftStatus!=="going");$("guestSwitch").classList.toggle("on",draftGuest);$("guestNameField").classList.toggle("hide",!draftGuest||draftStatus!=="going");const can=isWindowOpen()||DEMO_MODE;$("goingBtn").disabled=!can;$("notGoingBtn").disabled=!can;$("saveAttendanceBtn").disabled=!can;if(!can&&currentRound){const now=new Date(),open=new Date(currentRound.opens_at),close=new Date(currentRound.closes_at);$("confirmNotice").classList.remove("hide");$("confirmNotice").textContent=now<open?`A confirmação abre ${new Intl.DateTimeFormat("pt-BR",{weekday:"long",hour:"2-digit",minute:"2-digit"}).format(open)}.`:`A lista foi encerrada às ${new Intl.DateTimeFormat("pt-BR",{hour:"2-digit",minute:"2-digit"}).format(close)}.`}else $("confirmNotice").classList.add("hide")}
+$("saveAttendanceBtn").onclick=async()=>{if(!currentRound){toast("Ainda não existe baba criado.");return}if(!isWindowOpen()&&!DEMO_MODE){toast("A confirmação não está aberta.");return}const guestName=draftGuest?$("guestNameInput").value.trim():null;if(draftStatus==="going"&&draftGuest&&!guestName){toast("Digite o nome do visitante.");return}const row={round_id:currentRound.id,player_id:profile.id,status:draftStatus,bringing_guest:draftStatus==="going"&&draftGuest,guest_name:draftStatus==="going"&&draftGuest?guestName:null};if(DEMO_MODE){const idx=attendance.findIndex(a=>a.player_id===profile.id);const old=idx>=0?attendance[idx]:null;row.confirmed_at=draftStatus==="going"?(old?.status==="going"?old.confirmed_at:new Date().toISOString()):old?.confirmed_at||null;if(idx>=0)attendance[idx]={...attendance[idx],...row};else attendance.push(row);renderAll();toast("Confirmação atualizada.");return}const{data,error}=await sb.from("attendance").upsert(row,{onConflict:"round_id,player_id"}).select().single();if(error){toast(error.message);return}const idx=attendance.findIndex(a=>a.player_id===profile.id);if(idx>=0)attendance[idx]=data;else attendance.push(data);renderAll();toast("Confirmação atualizada.")};
+
+/* ==================== LIST ==================== */
+function liveEntries(){
+  if(roster.length){return roster.map(r=>({kind:r.entry_type,player_id:r.player_id,host_player_id:r.host_player_id,name:r.display_name,status:r.roster_status,position:r.position}))}
+  const going=attendance.filter(a=>a.status==="going").sort((a,b)=>new Date(a.confirmed_at||0)-new Date(b.confirmed_at||0));
+  const memberEntries=going.map(a=>{const p=players.find(p=>p.id===a.player_id);return p?{kind:"member",player_id:p.id,name:p.name,host_player_id:null,confirmed_at:a.confirmed_at}:null}).filter(Boolean);
+  const guestEntries=going.filter(a=>a.bringing_guest&&a.guest_name).map(a=>{const host=players.find(p=>p.id===a.player_id);return{kind:"guest",player_id:null,host_player_id:a.player_id,name:a.guest_name,host_name:host?.name||"",confirmed_at:a.confirmed_at}});
+  const all=[...memberEntries,...guestEntries];return all.map((x,i)=>({...x,status:i<20?"main":"waitlist",position:i+1}));
+}
+function myEntryStatus(){const entries=liveEntries();const mine=entries.find(e=>e.kind==="member"&&e.player_id===profile.id);return mine}
+function renderList(){const entries=liveEntries(),main=entries.filter(e=>e.status==="main"),wait=entries.filter(e=>e.status==="waitlist");$("mainCount").textContent=main.length;$("mainCountBig").textContent=main.length;$("waitPill").textContent=`${wait.length} aguardando`;$("mainList").innerHTML=main.length?main.map((e,i)=>personRow(e,i+1)).join(""):'<div class="empty">A lista ainda está vazia.</div>';$("waitSection").classList.toggle("hide",wait.length===0);$("waitCountBig").textContent=wait.length;$("waitList").innerHTML=wait.map((e,i)=>personRow(e,21+i,true)).join("");const mine=myEntryStatus();const a=myAttendance();if(a?.status!=="going"){$("myStatusText").textContent=a?.status==="not_going"?"Você marcou que não vai.":"Você ainda não confirmou.";$("myStatusBox").className="notice";$("myStatusBox").textContent="Confirme sua presença para entrar na lista."}else if(mine?.status==="main"){$("myStatusText").textContent="Você está na lista principal.";$("myStatusBox").className="notice success";$("myStatusBox").textContent=`Sua posição atual é ${mine.position} de 20.${a.bringing_guest?" Seu visitante entra na fila depois dos jogadores cadastrados.":""}`}else{$("myStatusText").textContent="Você está aguardando vaga.";$("myStatusBox").className="notice";$("myStatusBox").textContent=`Você está na posição ${mine?.position||"—"} da fila geral. Se alguém sair, a lista sobe automaticamente até ser definida pelo admin.`}}
+function personRow(e,pos,waiting=false){return`<div class="person"><div class="pmain"><div class="pos">${pos}</div><div class="avatar">${initials(e.name)}</div><div><div class="name">${esc(e.name)}</div>${e.kind==="guest"?`<div class="sub">visitante${e.host_name?` de ${esc(e.host_name)}`:""}</div>`:""}</div></div><span class="tag ${e.kind==="guest"?"guest":waiting?"wait":""}">${e.kind==="guest"?"visitante":waiting?"aguardando":"confirmado"}</span></div>`}
+
+/* ==================== ROSTER / DRAW ==================== */
+async function finalizeRoster(){if(!profile.is_admin||!currentRound)return;const entries=(()=>{const old=roster;roster=[];const x=liveEntries();roster=old;return x})();if(DEMO_MODE){roster=entries.map((e,i)=>({id:`rr-demo-${i+1}`,round_id:currentRound.id,entry_type:e.kind,player_id:e.player_id,host_player_id:e.host_player_id,display_name:e.name,roster_status:e.status,position:e.position,attended:null}));currentRound.status="closed";renderAll();toast("Lista de 20 definida.");return}const{error:d}=await sb.from("round_roster").delete().eq("round_id",currentRound.id);if(d){toast(d.message);return}const rows=entries.map(e=>({round_id:currentRound.id,entry_type:e.kind,player_id:e.player_id,host_player_id:e.host_player_id,display_name:e.name,roster_status:e.status,position:e.position}));let saved=[];if(rows.length){const{data,error}=await sb.from("round_roster").insert(rows).select();if(error){toast(error.message);return}saved=data||[]}await sb.from("rounds").update({status:"closed"}).eq("id",currentRound.id);currentRound.status="closed";roster=saved;renderAll();toast("Lista principal definida e confirmação fechada.")}
+$("finalizeRosterBtn").onclick=finalizeRoster;
+async function historyPairs(){if(DEMO_MODE)return{};const{data,error}=await sb.from("team_members").select("team_id,player_id").not("player_id","is",null);if(error)throw error;const by={};(data||[]).forEach(x=>{by[x.team_id]||=[];by[x.team_id].push(x.player_id)});const pairs={};Object.values(by).forEach(ids=>{for(let i=0;i<ids.length;i++)for(let j=i+1;j<ids.length;j++){const k=pairKey(ids[i],ids[j]);pairs[k]=(pairs[k]||0)+1}});return pairs}
+function buildCandidate(main,history){const restricted=main.filter(e=>e.kind==="member"&&ruleFor(e.player_id)),others=main.filter(e=>!(e.kind==="member"&&ruleFor(e.player_id)));if(restricted.length>5)throw new Error(`Há ${restricted.length} jogadores marcados para separação e só 5 times. Ajuste a regra interna antes de sortear.`);const teams=Array.from({length:5},()=>[]);shuffle(restricted).forEach((p,i)=>teams[i].push(p));const pool=shuffle(others);let k=0;for(let i=0;i<5;i++)while(teams[i].length<4)teams[i].push(pool[k++]);let score=0;teams.forEach(t=>{for(let i=0;i<t.length;i++)for(let j=i+1;j<t.length;j++){const a=t[i],b=t[j];if(a.player_id&&b.player_id){const c=history[pairKey(a.player_id,b.player_id)]||0;score+=c*c*8+c*3}}});return{teams,score}}
+$("drawBtn").onclick=async()=>{if(!profile.is_admin||!currentRound)return;if(!roster.length)await finalizeRoster();const main=liveEntries().filter(e=>e.status==="main");if(main.length!==20){toast(`A lista principal precisa ter 20 pessoas. Hoje tem ${main.length}.`);return}try{$("drawBtn").disabled=true;const hist=await historyPairs();let best=null;for(let i=0;i<1200;i++){const c=buildCandidate(main,hist);if(!best||c.score<best.score)best=c}if(DEMO_MODE){draw={id:"d-demo",teams:best.teams};currentRound.status="drawn";renderAll();toast("Times sorteados.");return}const{data:d,error:de}=await sb.from("draws").insert({round_id:currentRound.id,created_by:profile.id}).select().single();if(de)throw de;const{data:ts,error:te}=await sb.from("teams").insert(best.teams.map((_,i)=>({draw_id:d.id,team_number:i+1}))).select();if(te)throw te;const members=[];ts.forEach((t,i)=>best.teams[i].forEach(e=>members.push({team_id:t.id,player_id:e.player_id,host_player_id:e.host_player_id,display_name:e.name,member_type:e.kind})));const{error:me}=await sb.from("team_members").insert(members);if(me)throw me;await sb.from("rounds").update({status:"drawn"}).eq("id",currentRound.id);draw={...d,teams:best.teams};currentRound.status="drawn";renderAll();toast("Sorteio salvo e liberado para todos.")}catch(err){toast(err.message||"Erro no sorteio.")}finally{$("drawBtn").disabled=false}};
+function renderDraw(){if(!draw?.teams){$("drawInfo").textContent="O sorteio ainda não foi realizado.";$("teamsList").innerHTML='<div class="empty">Quando o admin sortear, os 5 times aparecem aqui.</div>';return}$("drawInfo").textContent="Sorteio liberado para todos os jogadores.";$("teamsList").innerHTML=draw.teams.map((team,i)=>`<div class="team"><div class="teamhead"><strong>TIME ${String(i+1).padStart(2,"0")}</strong><span class="tag">4 jogadores</span></div><div class="teamgrid">${team.map(p=>`<div class="chip">${esc(p.name)}${p.kind==="guest"?"<small>visitante</small>":""}</div>`).join("")}</div></div>`).join("")}
+
+/* ==================== PROFILE ==================== */
+function renderProfile(){const eligible=profileStats.eligible||0,attended=profileStats.attended||0,missed=Math.max(0,eligible-attended),rate=eligible?Math.round(attended/eligible*100):null;$("profileName").textContent=profile.name;$("attendanceRate").textContent=rate===null?"—":`${rate}%`;$("attendanceProgress").style.width=rate===null?"0%":`${rate}%`;$("attendedCount").textContent=attended;$("eligibleCount").textContent=eligible;$("missedCount").textContent=missed}
+
+/* ==================== ADMIN ==================== */
+$("createNextRoundBtn").onclick=async()=>{if(!profile.is_admin)return;const date=nextTuesdayISO(),open=$("openHour").value,close=$("closeHour").value,row={title:"Baba da Terça",event_date:date,event_time:"19:00",capacity:20,opens_at:dtBR(date,open).toISOString(),closes_at:dtBR(date,close).toISOString(),status:"open"};if(DEMO_MODE){currentRound={id:"r"+Date.now(),...row};attendance=[];roster=[];draw=null;renderAll();toast(`Próxima terça criada. Lista abre às ${open}.`);return}const{data,error}=await sb.from("rounds").insert(row).select().single();if(error){toast(error.message);return}currentRound=data;attendance=[];roster=[];draw=null;renderAll();toast(`Próxima terça criada. Lista abre às ${open}.`)};
+async function toggleRule(id){const value=!ruleFor(id);if(DEMO_MODE){const i=privateRules.findIndex(r=>r.player_id===id);if(i>=0)privateRules[i].separated=value;else privateRules.push({player_id:id,separated:value});renderAdmin();return}const{error}=await sb.rpc("admin_set_separated",{target_player:id,new_value:value});if(error){toast(error.message);return}const i=privateRules.findIndex(r=>r.player_id===id);if(i>=0)privateRules[i].separated=value;else privateRules.push({player_id:id,separated:value});renderAdmin()}
+async function setCheckin(rosterId,value){if(DEMO_MODE){const r=roster.find(x=>x.id===rosterId||`${x.player_id}-${x.position}`===rosterId);if(r)r.attended=value;renderAdmin();return}const{error}=await sb.from("round_roster").update({attended:value}).eq("id",rosterId);if(error){toast(error.message);return}const r=roster.find(x=>x.id===rosterId);if(r)r.attended=value;renderAdmin();toast("Comparecimento atualizado.")}
+window.toggleRule=toggleRule;window.setCheckin=setCheckin;
+function renderAdmin(){if(!profile?.is_admin)return;$("adminPlayers").innerHTML=players.map(p=>`<div class="adminrow"><div class="pmain"><div class="avatar">${initials(p.name)}</div><div><div class="name">${esc(p.name)}</div><div class="sub">${ruleFor(p.id)?"separação interna ativa":"sem regra interna"}</div></div></div><button class="smallbtn" onclick="toggleRule('${p.id}')">${ruleFor(p.id)?"REMOVER":"SEPARAR"}</button></div>`).join("");const main=liveEntries().filter(e=>e.status==="main");$("checkinList").innerHTML=main.length?main.map((e,i)=>{const r=roster.find(x=>x.position===e.position&&x.display_name===e.name)||e;const id=r.id||`${r.player_id}-${r.position}`;return`<div class="adminrow"><div><div class="name">${esc(e.name)}</div><div class="sub">${e.kind==="guest"?"visitante":"jogador"}</div></div><div class="admin-actions"><button class="smallbtn" onclick="setCheckin('${id}',true)">✓ FOI</button><button class="smallbtn" onclick="setCheckin('${id}',false)">FALTOU</button></div></div>`}).join(""):'<div class="empty">Defina a lista principal para marcar comparecimento.</div>'}
+
+/* ==================== MAIN RENDER ==================== */
+function renderAll(){if(!profile)return;$("userLabel").textContent=profile.name+(profile.is_admin?" · admin":"");$("profileName").textContent=profile.name;$("adminNavBtn").classList.toggle("hide",!profile.is_admin);$("bottomNav").classList.toggle("adminnav",!!profile.is_admin);if(!currentRound){$("roundStatus").textContent="AGUARDANDO";$("roundTitle").textContent="Próxima terça · 19h";$("roundDate").textContent="Ainda não criada";$("mainCount").textContent="0";$("mainCountBig").textContent="0";$("mainList").innerHTML='<div class="empty">O admin ainda não criou a próxima rodada.</div>';$("goingBtn").disabled=true;$("notGoingBtn").disabled=true;$("saveAttendanceBtn").disabled=true;renderDraw();renderProfile();if(profile.is_admin)renderAdmin();return}
+  $("roundTitle").textContent="Terça, 19h";$("roundDate").textContent=fmtDate(currentRound.event_date);const now=new Date(),open=new Date(currentRound.opens_at),close=new Date(currentRound.closes_at);$("roundStatus").textContent=currentRound.status==="drawn"?"TIMES SORTEADOS":currentRound.status==="closed"?"LISTA DEFINIDA":now<open?"CONFIRMAÇÃO AGENDADA":now<=close?"LISTA ABERTA":"LISTA ENCERRADA";$("roundSubtitle").textContent=now<open?`A lista abre às ${new Intl.DateTimeFormat("pt-BR",{hour:"2-digit",minute:"2-digit"}).format(open)}.`:`Baba desta terça às 19h.`;
+  const mine=myAttendance();draftStatus=mine?.status||"going";draftGuest=!!mine?.bringing_guest;if(mine?.guest_name)$("guestNameInput").value=mine.guest_name;renderAttendanceForm();renderList();renderDraw();renderProfile();if(profile.is_admin)renderAdmin()}
+
+async function init(){if(DEMO_MODE){$("demoBox").classList.remove("hide");showAuth();return}const{data:{session}}=await sb.auth.getSession();if(!session){showAuth();return}currentUser=session.user;await loadAppData();showApp();renderAll();sb.auth.onAuthStateChange((_e,s)=>{if(!s)showAuth()})}
+init().catch(err=>{console.error(err);toast(err.message||"Erro ao iniciar.")});
+</script>
+</body>
+</html>
