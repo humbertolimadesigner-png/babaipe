@@ -269,19 +269,19 @@ $("saveAvatarBtn")?.addEventListener("click",async()=>{
     $("saveAvatarBtn").disabled=true;
     $("saveAvatarBtn").textContent="SALVANDO...";
     const blob=await fileToWebpBlob(file,320,.84);
-    const path=`${profile.id}/avatar.webp`;
+    const path=`${profile.id}/avatar-${Date.now()}.webp`;
 
     const{error:uploadError}=await sb.storage
       .from("avatars")
       .upload(path,blob,{
         contentType:"image/webp",
-        upsert:true,
+        upsert:false,
         cacheControl:"3600"
       });
     if(uploadError)throw uploadError;
 
     const{data:publicData}=sb.storage.from("avatars").getPublicUrl(path);
-    const url=`${publicData.publicUrl}?v=${Date.now()}`;
+    const url=publicData.publicUrl;
 
     const{error:updateError}=await sb
       .from("profiles")
