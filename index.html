@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#090c0a">
-<title>Baba da Terça</title>
+<meta name="theme-color" content="#0d0814">
+<title>Associação Ipê Roxo</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-:root{--bg:#090c0a;--card:#111512;--card2:#171c18;--line:#252c27;--text:#f4f7f5;--muted:#8f9992;--green:#baff3b;--green2:#93d51f;--red:#ff7676;--yellow:#ffd166;--max:760px;--r:22px}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 88% -6%,rgba(186,255,59,.13),transparent 28%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}button,input,select{font:inherit}button{cursor:pointer}.hide{display:none!important}
-.shell{width:min(100% - 24px,var(--max));margin:auto;padding:16px 0 110px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.brand{display:flex;align-items:center;gap:11px}.logo{width:44px;height:44px;border-radius:14px;background:var(--green);color:#0a0d0b;display:grid;place-items:center;font-weight:1000;transform:rotate(-4deg)}.brand strong{display:block;letter-spacing:-.02em}.brand small{color:var(--muted)}.ghost{border:1px solid var(--line);background:#0d110e;color:var(--text);border-radius:999px;padding:9px 12px}
+:root{--bg:#0d0814;--card:#15101f;--card2:#1c1528;--line:#31253f;--text:#f7f4fb;--muted:#aa9fba;--green:#b266ff;--green2:#8c39e6;--red:#ff8fa3;--yellow:#ffd166;--max:760px;--r:22px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 88% -6%,rgba(178,102,255,.18),transparent 28%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}button,input,select{font:inherit}button{cursor:pointer}.hide{display:none!important}
+.shell{width:min(100% - 24px,var(--max));margin:auto;padding:16px 0 110px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.brand{display:flex;align-items:center;gap:11px}.logo{width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.05);display:grid;place-items:center;overflow:hidden;border:1px solid var(--line)}.logoimg{width:100%;height:100%;object-fit:contain;display:block}.avatar{overflow:hidden}.avatar img{width:100%;height:100%;object-fit:cover;display:block}.avatar.large{width:84px;height:84px;border-radius:22px}.avatar.medium{width:48px;height:48px;border-radius:16px}.profilephoto{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.profilephoto .actions{display:grid;gap:8px;flex:1;min-width:220px}.brand strong{display:block;letter-spacing:-.02em}.brand small{color:var(--muted)}.ghost{border:1px solid var(--line);background:#0d110e;color:var(--text);border-radius:999px;padding:9px 12px}
 .hero,.card{border:1px solid var(--line);background:var(--card);border-radius:28px;padding:22px}.card{margin-top:14px;border-radius:var(--r);padding:18px}.eyebrow{font-size:11px;letter-spacing:.15em;font-weight:900;color:var(--green);text-transform:uppercase}h1{font-size:clamp(34px,8vw,56px);line-height:.96;letter-spacing:-.055em;margin:12px 0}.lead{color:var(--muted);line-height:1.5;margin:0}.meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:17px}.pill{border:1px solid var(--line);background:#0d110e;padding:8px 11px;border-radius:999px;font-size:12px}.pill b{color:var(--green)}
 .title{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:14px}.title h2{font-size:19px;margin:0;letter-spacing:-.025em}.title p{font-size:12px;color:var(--muted);margin:4px 0 0}.count{font-size:28px;color:var(--green);font-weight:950;letter-spacing:-.04em}.stack{display:grid;gap:10px}.row{display:grid;grid-template-columns:1fr 1fr;gap:9px}.field{display:grid;gap:6px}.field label{font-size:11px;color:var(--muted);font-weight:800}.field input,.field select{width:100%;background:#0d110e;color:var(--text);border:1px solid var(--line);border-radius:13px;padding:12px 13px;outline:none}.field input:focus,.field select:focus{border-color:#61763b}
-.status-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.status{min-height:54px;border:1px solid var(--line);border-radius:16px;background:var(--card2);color:var(--text);font-weight:900}.status.active.yes{background:var(--green);color:#0a0d0b;border-color:var(--green)}.status.active.no{background:#2a1718;color:#ffc0c0;border-color:#643136}.status:disabled{opacity:.4;cursor:not-allowed}.primary,.secondary{width:100%;border-radius:16px;padding:14px 16px;font-weight:950}.primary{border:0;background:var(--green);color:#0a0d0b}.secondary{border:1px solid var(--line);background:var(--card2);color:var(--text)}.primary:disabled,.secondary:disabled{opacity:.4;cursor:not-allowed}.smallbtn{border:1px solid var(--line);background:#0e120f;color:var(--text);border-radius:10px;padding:7px 9px;font-size:10px;font-weight:800}
-.switchline{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px;border:1px solid var(--line);border-radius:14px;background:#0d110e}.switchline strong{font-size:13px}.switchline small{display:block;color:var(--muted);margin-top:2px}.switch{width:48px;height:28px;border-radius:999px;border:0;background:#303731;padding:3px;position:relative;transition:.2s}.switch:after{content:"";width:22px;height:22px;border-radius:50%;background:#fff;display:block;transition:.2s}.switch.on{background:var(--green)}.switch.on:after{transform:translateX(20px);background:#0a0d0b}
-.notice{border:1px solid #4c4328;background:#1c180f;color:#e8d99b;padding:11px 13px;border-radius:13px;font-size:12px;line-height:1.45}.success{border-color:#334b23;background:#121a0e;color:#d5f7a8}.list{display:grid;gap:8px}.person{display:flex;align-items:center;justify-content:space-between;gap:11px;border:1px solid var(--line);background:var(--card2);border-radius:14px;padding:10px 11px}.pmain{display:flex;align-items:center;gap:10px;min-width:0}.pos{width:27px;height:27px;border-radius:9px;background:#0d110e;color:var(--muted);display:grid;place-items:center;font-size:11px;font-weight:900;flex:none}.avatar{width:35px;height:35px;border-radius:50%;background:#252d27;color:var(--green);display:grid;place-items:center;font-weight:900;flex:none}.name{font-weight:760;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sub{font-size:10px;color:var(--muted);margin-top:2px}.tag{font-size:10px;border-radius:999px;padding:5px 7px;background:#252b27;color:#aab1ac;white-space:nowrap}.tag.guest{background:#342d16;color:#ffe79b}.tag.wait{background:#2a2415;color:#e9d696}.empty{border:1px dashed #343c36;padding:17px;border-radius:14px;color:var(--muted);text-align:center;font-size:13px}
+.status-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.status{min-height:54px;border:1px solid var(--line);border-radius:16px;background:var(--card2);color:var(--text);font-weight:900}.status.active.yes{background:linear-gradient(135deg,#b266ff,#8a35d9);color:#fff;border-color:#b266ff}.status.active.no{background:#2a1718;color:#ffc0c0;border-color:#643136}.status:disabled{opacity:.4;cursor:not-allowed}.primary,.secondary{width:100%;border-radius:16px;padding:14px 16px;font-weight:950}.primary{border:0;background:linear-gradient(135deg,#b266ff,#8a35d9);color:#fff;box-shadow:0 8px 28px rgba(132,53,217,.18)}.secondary{border:1px solid var(--line);background:var(--card2);color:var(--text)}.primary:disabled,.secondary:disabled{opacity:.4;cursor:not-allowed}.smallbtn{border:1px solid var(--line);background:#0e120f;color:var(--text);border-radius:10px;padding:7px 9px;font-size:10px;font-weight:800}
+.switchline{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px;border:1px solid var(--line);border-radius:14px;background:#0d110e}.switchline strong{font-size:13px}.switchline small{display:block;color:var(--muted);margin-top:2px}.switch{width:48px;height:28px;border-radius:999px;border:0;background:#303731;padding:3px;position:relative;transition:.2s}.switch:after{content:"";width:22px;height:22px;border-radius:50%;background:#fff;display:block;transition:.2s}.switch.on{background:#9d4ff0}.switch.on:after{transform:translateX(20px);background:#fff}
+.notice{border:1px solid #4c4328;background:#1c180f;color:#e8d99b;padding:11px 13px;border-radius:13px;font-size:12px;line-height:1.45}.success{border-color:#334b23;background:#121a0e;color:#d5f7a8}.list{display:grid;gap:8px}.person{display:flex;align-items:center;justify-content:space-between;gap:11px;border:1px solid var(--line);background:var(--card2);border-radius:14px;padding:10px 11px}.pmain{display:flex;align-items:center;gap:10px;min-width:0}.pos{width:27px;height:27px;border-radius:9px;background:#120d18;color:var(--muted);display:grid;place-items:center;font-size:11px;font-weight:900;flex:none}.avatar{width:35px;height:35px;border-radius:50%;background:#25203a;color:#e1c6ff;display:grid;place-items:center;font-weight:900;flex:none}.name{font-weight:760;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sub{font-size:10px;color:var(--muted);margin-top:2px}.tag{font-size:10px;border-radius:999px;padding:5px 7px;background:#2b2340;color:#d7c8f4;white-space:nowrap}.tag.guest{background:#342d16;color:#ffe79b}.tag.wait{background:#2a2415;color:#e9d696}.empty{border:1px dashed #433651;padding:17px;border-radius:14px;color:var(--muted);text-align:center;font-size:13px}.chip.personchip{display:flex;align-items:center;gap:8px}.chip .avatar{width:28px;height:28px;font-size:10px}.leader-main{display:flex;align-items:center;gap:10px;min-width:0}
 .teams{display:grid;gap:10px}.team{border:1px solid var(--line);background:var(--card2);border-radius:17px;padding:14px}.teamhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.teamhead strong{font-size:12px;letter-spacing:.11em}.teamgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.chip{background:#0e120f;border:1px solid #252b27;border-radius:11px;padding:10px;font-size:12px}.chip small{display:block;color:var(--muted);margin-top:2px}
-.leaderboard{display:grid;gap:8px}.leader{display:grid;grid-template-columns:34px 1fr auto auto;gap:10px;align-items:center;border:1px solid var(--line);background:var(--card2);border-radius:14px;padding:11px}.rank{width:30px;height:30px;border-radius:10px;background:#0d110e;display:grid;place-items:center;font-weight:950;color:var(--green)}.metric{text-align:right}.metric b{display:block;font-size:17px}.metric small{color:var(--muted);font-size:9px;text-transform:uppercase}.scoreboard{display:grid;gap:10px}.match{border:1px solid var(--line);background:var(--card2);border-radius:17px;padding:14px}.matchscore{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px}.matchteam{font-weight:900}.matchteam.right{text-align:right}.score{font-size:26px;font-weight:1000;color:var(--green);white-space:nowrap}.currentmatch{border-color:#4b6429;background:linear-gradient(135deg,rgba(186,255,59,.07),transparent),var(--card2)}.goalplayers{display:grid;gap:8px}.goalrow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:9px 10px;background:#0d110e}.counter{display:flex;align-items:center;gap:7px}.counter button{width:30px;height:30px;border-radius:9px;border:1px solid var(--line);background:var(--card2);color:var(--text);font-weight:950}.counter b{min-width:18px;text-align:center;color:var(--green)}.rolebadge{font-size:9px;border-radius:999px;padding:4px 7px;background:#283321;color:#cfff84}.divider{height:1px;background:var(--line);margin:4px 0}.teamname{font-size:16px!important;letter-spacing:-.01em!important}.subtle{color:var(--muted);font-size:11px;line-height:1.4}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{border:1px solid var(--line);background:var(--card2);border-radius:17px;padding:15px}.stat b{display:block;font-size:28px;color:var(--green);letter-spacing:-.04em}.stat span{font-size:11px;color:var(--muted)}.progress{height:10px;background:#252b27;border-radius:999px;overflow:hidden;margin-top:10px}.progress i{display:block;height:100%;background:var(--green);width:0;border-radius:inherit}
+.leaderboard{display:grid;gap:8px}.leader{display:grid;grid-template-columns:34px 1fr auto auto;gap:10px;align-items:center;border:1px solid var(--line);background:var(--card2);border-radius:14px;padding:11px}.rank{width:30px;height:30px;border-radius:10px;background:#0d110e;display:grid;place-items:center;font-weight:950;color:var(--green)}.metric{text-align:right}.metric b{display:block;font-size:17px}.metric small{color:var(--muted);font-size:9px;text-transform:uppercase}.scoreboard{display:grid;gap:10px}.match{border:1px solid var(--line);background:var(--card2);border-radius:17px;padding:14px}.matchscore{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px}.matchteam{font-weight:900}.matchteam.right{text-align:right}.score{font-size:26px;font-weight:1000;color:var(--green);white-space:nowrap}.currentmatch{border-color:#6e3a9b;background:linear-gradient(135deg,rgba(178,102,255,.10),transparent),var(--card2)}.goalplayers{display:grid;gap:8px}.goalrow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:9px 10px;background:#0d110e}.counter{display:flex;align-items:center;gap:7px}.counter button{width:30px;height:30px;border-radius:9px;border:1px solid var(--line);background:var(--card2);color:var(--text);font-weight:950}.counter b{min-width:18px;text-align:center;color:var(--green)}.rolebadge{font-size:9px;border-radius:999px;padding:4px 7px;background:#283321;color:#cfff84}.divider{height:1px;background:var(--line);margin:4px 0}.teamname{font-size:16px!important;letter-spacing:-.01em!important}.subtle{color:var(--muted);font-size:11px;line-height:1.4}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{border:1px solid var(--line);background:var(--card2);border-radius:17px;padding:15px}.stat b{display:block;font-size:28px;color:var(--green);letter-spacing:-.04em}.stat span{font-size:11px;color:var(--muted)}.progress{height:10px;background:#252b27;border-radius:999px;overflow:hidden;margin-top:10px}.progress i{display:block;height:100%;background:var(--green);width:0;border-radius:inherit}
 .nav{position:fixed;left:50%;bottom:max(12px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(calc(100% - 20px),720px);display:flex;gap:5px;overflow-x:auto;background:rgba(13,17,14,.94);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;padding:6px;z-index:15;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}.navbtn{flex:1 0 68px;border:0;background:transparent;color:#727d75;border-radius:15px;padding:10px 5px;font-size:9px;font-weight:800}.navbtn b{display:block;font-size:17px;line-height:1.1;margin-bottom:3px}.navbtn.active{background:var(--card2);color:var(--text)}
 .view{display:none}.view.active{display:block}.adminbox{border:1px solid var(--line);border-radius:16px;padding:13px;background:#0d110e}.adminlist{display:grid;gap:8px;max-height:420px;overflow:auto}.adminrow{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--line);background:var(--card2);border-radius:13px;padding:10px}.admin-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}details{border:1px solid var(--line);border-radius:14px;padding:12px;background:#0d110e}summary{cursor:pointer;font-weight:850;font-size:13px}
 .auth{min-height:100vh;display:grid;place-items:center;padding:20px}.authcard{width:min(100%,440px);border:1px solid var(--line);background:var(--card);border-radius:28px;padding:24px}.tabs{display:grid;grid-template-columns:1fr 1fr;background:#0d110e;padding:4px;border-radius:13px;margin:20px 0}.tab{border:0;background:transparent;color:var(--muted);padding:10px;border-radius:10px;font-weight:850}.tab.active{background:var(--card2);color:var(--text)}.toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%) translateY(15px);opacity:0;pointer-events:none;transition:.2s;background:#f5f7f5;color:#0b0e0c;padding:11px 14px;border-radius:999px;font-weight:850;font-size:12px;z-index:30;max-width:calc(100% - 30px);text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -27,8 +27,8 @@
 
 <div id="authView" class="auth hide">
   <div class="authcard">
-    <div class="brand"><div class="logo">B</div><div><strong>Baba da Terça</strong><small>terça · 19h</small></div></div>
-    <h1>Seu baba,<br>sem bagunça.</h1>
+    <div class="brand"><div class="logo"><img src="logo-ipe-roxo.webp" class="logoimg" alt="Associação Ipê Roxo"></div><div><strong>Associação Ipê Roxo</strong><small>terça · 19h</small></div></div>
+    <h1>Seu baba,<br>mais organizado.</h1>
     <p class="lead">Cadastre-se uma vez. Toda terça você confirma se vai, informa seu visitante e acompanha a lista e o sorteio.</p>
     <div class="tabs"><button id="loginTab" class="tab active">Entrar</button><button id="signupTab" class="tab">Criar cadastro</button></div>
     <form id="authForm" class="stack">
@@ -42,7 +42,7 @@
 
 <main id="appView" class="shell hide">
   <header class="top">
-    <div class="brand"><div class="logo">B</div><div><strong>Baba da Terça</strong><small id="userLabel">—</small></div></div>
+    <div class="brand"><div class="logo"><img src="logo-ipe-roxo.webp" class="logoimg" alt="Associação Ipê Roxo"></div><div><strong>Associação Ipê Roxo</strong><small id="userLabel">—</small></div></div>
     <button id="logoutBtn" class="ghost">Sair</button>
   </header>
 
@@ -72,13 +72,13 @@
   </section>
 
   <section id="view-lista" class="view">
-    <div class="hero"><div class="eyebrow">LISTA DO BABA</div><h1>Quem vai<br>jogar.</h1><p class="lead">Só aparecem as pessoas confirmadas para esta terça.</p></div>
+    <div class="hero"><div class="eyebrow">IPÊ ROXO · LISTA DO BABA</div><h1>Quem vai<br>jogar.</h1><p class="lead">Só aparecem as pessoas confirmadas para esta terça.</p></div>
     <div class="card"><div class="title"><div><h2>Lista principal</h2><p>20 vagas · 5 times de 4.</p></div><div id="mainCountBig" class="count">0</div></div><div id="mainList" class="list"></div></div>
     <div id="waitSection" class="card hide"><div class="title"><div><h2>Aguardando vaga</h2><p>Jogadores cadastrados têm prioridade. Visitantes sobem automaticamente se ainda houver vaga.</p></div><div id="waitCountBig" class="count">0</div></div><div id="waitList" class="list"></div></div>
   </section>
 
   <section id="view-times" class="view">
-    <div class="hero"><div class="eyebrow">SORTEIO</div><h1>5 times.<br>4 por time.</h1><p class="lead">Cada terça recebe nomes automáticos. Depois do sorteio, os times ficam liberados para todo mundo.</p></div>
+    <div class="hero"><div class="eyebrow">IPÊ ROXO · SORTEIO</div><h1>5 times.<br>4 por time.</h1><p class="lead">Cada terça recebe nomes automáticos. Depois do sorteio, os times ficam liberados para todo mundo.</p></div>
     <div class="card"><div class="title"><div><h2>Times da terça</h2><p id="drawInfo">O sorteio ainda não foi realizado.</p></div></div><div id="teamsList" class="teams"></div></div>
     <div class="card"><div class="title"><div><h2>Jogos da noite</h2><p>Quem vence permanece em campo; quem perde vai para o fim da fila.</p></div></div><div id="publicMatches" class="scoreboard"></div></div>
   </section>
@@ -93,6 +93,17 @@
 
   <section id="view-perfil" class="view">
     <div class="hero"><div class="eyebrow">MEU PERFIL</div><h1 id="profileName">—</h1><p class="lead">Seu histórico de presença nos babas já contabilizados.</p></div>
+    <div class="card">
+      <div class="title"><div><h2>Sua foto</h2><p>Ela aparece na lista, nos times e na artilharia.</p></div></div>
+      <div class="profilephoto">
+        <div id="profileAvatarWrap"> <div id="profileAvatarPreview" class="avatar large">—</div> </div>
+        <div class="actions">
+          <div class="field"><label>ESCOLHER FOTO</label><input id="avatarInput" type="file" accept="image/*"></div>
+          <button id="saveAvatarBtn" class="secondary">SALVAR FOTO</button>
+          <div class="subtle">A imagem é convertida para WebP em tamanho reduzido para manter o sistema leve.</div>
+        </div>
+      </div>
+    </div>
     <div class="card">
       <div class="title"><div><h2>Taxa de comparecimento</h2><p>Considera babas em que você teve vaga na lista principal e o admin marcou a presença.</p></div></div>
       <div class="stats"><div class="stat"><b id="attendanceRate">—</b><span>taxa de presença</span><div class="progress"><i id="attendanceProgress"></i></div></div><div class="stat"><b id="attendedCount">0</b><span>comparecimentos</span></div></div>
@@ -209,7 +220,90 @@ function isStaff(){return !!(profile?.is_admin||profile?.is_editor)}
 function pickTeamNames(){return shuffle(TEAM_NAME_POOL).slice(0,5)}
 function teamById(id){return draw?.teamsDetailed?.find(t=>t.id===id)||null}
 function teamLabel(id){return teamById(id)?.team_name||"Time"}
+function playerById(id){return players.find(p=>p.id===id)||null}
+function avatarMarkup(name,avatarUrl,cls="avatar"){return avatarUrl?`<div class="${cls}"><img src="${esc(avatarUrl)}" alt="${esc(name)}" loading="lazy"></div>`:`<div class="${cls}">${initials(name)}</div>`}
+function avatarForPlayer(id,name,cls="avatar"){const p=id?playerById(id):null;return avatarMarkup(p?.name||name,p?.avatar_url,cls)}
+async function fileToWebpBlob(file,size=320,quality=.84){
+  return new Promise((resolve,reject)=>{
+    const fr=new FileReader();
+    fr.onerror=()=>reject(new Error("Não foi possível ler a imagem."));
+    fr.onload=()=>{
+      const img=new Image();
+      img.onerror=()=>reject(new Error("Arquivo de imagem inválido."));
+      img.onload=()=>{
+        const canvas=document.createElement("canvas");
+        canvas.width=size;canvas.height=size;
+        const ctx=canvas.getContext("2d");
+        const scale=Math.max(size/img.width,size/img.height);
+        const w=img.width*scale,h=img.height*scale;
+        const x=(size-w)/2,y=(size-h)/2;
+        ctx.drawImage(img,x,y,w,h);
+        canvas.toBlob(blob=>{
+          if(!blob)return reject(new Error("Não foi possível converter a foto."));
+          resolve(blob);
+        },"image/webp",quality);
+      };
+      img.src=String(fr.result);
+    };
+    fr.readAsDataURL(file);
+  });
+}
 
+
+
+$("avatarInput")?.addEventListener("change",async()=>{
+  const file=$("avatarInput").files?.[0];
+  if(!file||!file.type.startsWith("image/"))return;
+  const localUrl=URL.createObjectURL(file);
+  const wrap=$("profileAvatarWrap");
+  if(wrap)wrap.innerHTML=`<div id="profileAvatarPreview" class="avatar large"><img src="${localUrl}" alt="Prévia da foto"></div>`;
+});
+
+$("saveAvatarBtn")?.addEventListener("click",async()=>{
+  const file=$("avatarInput").files?.[0];
+  if(!file){toast("Escolha uma foto primeiro.");return}
+  if(!file.type.startsWith("image/")){toast("Selecione uma imagem válida.");return}
+  if(file.size>8*1024*1024){toast("Escolha uma foto de até 8 MB.");return}
+
+  try{
+    $("saveAvatarBtn").disabled=true;
+    $("saveAvatarBtn").textContent="SALVANDO...";
+    const blob=await fileToWebpBlob(file,320,.84);
+    const path=`${profile.id}/avatar.webp`;
+
+    const{error:uploadError}=await sb.storage
+      .from("avatars")
+      .upload(path,blob,{
+        contentType:"image/webp",
+        upsert:true,
+        cacheControl:"3600"
+      });
+    if(uploadError)throw uploadError;
+
+    const{data:publicData}=sb.storage.from("avatars").getPublicUrl(path);
+    const url=`${publicData.publicUrl}?v=${Date.now()}`;
+
+    const{error:updateError}=await sb
+      .from("profiles")
+      .update({avatar_url:url})
+      .eq("id",profile.id);
+    if(updateError)throw updateError;
+
+    profile.avatar_url=url;
+    const p=players.find(x=>x.id===profile.id);
+    if(p)p.avatar_url=url;
+
+    $("avatarInput").value="";
+    renderAll();
+    toast("Foto atualizada.");
+  }catch(err){
+    console.error(err);
+    toast(err.message||"Erro ao salvar foto.");
+  }finally{
+    $("saveAvatarBtn").disabled=false;
+    $("saveAvatarBtn").textContent="SALVAR FOTO";
+  }
+});
 
 /* ==================== AUTH ==================== */
 $("loginTab").onclick=()=>setAuthMode("login");$("signupTab").onclick=()=>setAuthMode("signup");
@@ -227,7 +321,7 @@ function showApp(){
 async function loadAppData(){
   const[{data:p,error:pe},{data:ps,error:pse},{data:rs,error:re}]=await Promise.all([
     sb.from("profiles").select("*").eq("id",currentUser.id).single(),
-    sb.from("profiles").select("id,name,is_admin,is_editor,active").eq("active",true).order("name"),
+    sb.from("profiles").select("id,name,is_admin,is_editor,active,avatar_url").eq("active",true).order("name"),
     sb.from("rounds").select("*").order("event_date",{ascending:false}).limit(1)
   ]);
   if(pe)throw pe;if(pse)throw pse;if(re)throw re;
@@ -318,7 +412,7 @@ function liveEntries(){
 }
 function myEntryStatus(){const entries=liveEntries();const mine=entries.find(e=>e.kind==="member"&&e.player_id===profile.id);return mine}
 function renderList(){const entries=liveEntries(),main=entries.filter(e=>e.status==="main"),wait=entries.filter(e=>e.status==="waitlist");$("mainCount").textContent=main.length;$("mainCountBig").textContent=main.length;$("waitPill").textContent=`${wait.length} aguardando`;$("mainList").innerHTML=main.length?main.map((e,i)=>personRow(e,i+1)).join(""):'<div class="empty">A lista ainda está vazia.</div>';$("waitSection").classList.toggle("hide",wait.length===0);$("waitCountBig").textContent=wait.length;$("waitList").innerHTML=wait.map((e,i)=>personRow(e,21+i,true)).join("");const mine=myEntryStatus();const a=myAttendance();if(a?.status!=="going"){$("myStatusText").textContent=a?.status==="not_going"?"Você marcou que não vai.":"Você ainda não confirmou.";$("myStatusBox").className="notice";$("myStatusBox").textContent="Confirme sua presença para entrar na lista."}else if(mine?.status==="main"){$("myStatusText").textContent="Você está na lista principal.";$("myStatusBox").className="notice success";$("myStatusBox").textContent=`Sua posição atual é ${mine.position} de 20.${a.bringing_guest?" Seu visitante entra na fila depois dos jogadores cadastrados.":""}`}else{$("myStatusText").textContent="Você está aguardando vaga.";$("myStatusBox").className="notice";$("myStatusBox").textContent=`Você está na posição ${mine?.position||"—"} da fila geral. Se alguém sair, a lista sobe automaticamente até ser definida pelo admin.`}}
-function personRow(e,pos,waiting=false){return`<div class="person"><div class="pmain"><div class="pos">${pos}</div><div class="avatar">${initials(e.name)}</div><div><div class="name">${esc(e.name)}</div>${e.kind==="guest"?`<div class="sub">visitante${e.host_name?` de ${esc(e.host_name)}`:""}</div>`:""}</div></div><span class="tag ${e.kind==="guest"?"guest":waiting?"wait":""}">${e.kind==="guest"?"visitante":waiting?"aguardando":"confirmado"}</span></div>`}
+function personRow(e,pos,waiting=false){return`<div class="person"><div class="pmain"><div class="pos">${pos}</div>${avatarForPlayer(e.player_id,e.name)}<div><div class="name">${esc(e.name)}</div>${e.kind==="guest"?`<div class="sub">visitante${e.host_name?` de ${esc(e.host_name)}`:""}</div>`:""}</div></div><span class="tag ${e.kind==="guest"?"guest":waiting?"wait":""}">${e.kind==="guest"?"visitante":waiting?"aguardando":"confirmado"}</span></div>`}
 
 /* ==================== ROSTER / DRAW ==================== */
 async function finalizeRoster(){if(!profile.is_admin||!currentRound)return;const entries=(()=>{const old=roster;roster=[];const x=liveEntries();roster=old;return x})();const{error:d}=await sb.from("round_roster").delete().eq("round_id",currentRound.id);if(d){toast(d.message);return}const rows=entries.map(e=>({round_id:currentRound.id,entry_type:e.kind,player_id:e.player_id,host_player_id:e.host_player_id,display_name:e.name,roster_status:e.status,position:e.position}));let saved=[];if(rows.length){const{data,error}=await sb.from("round_roster").insert(rows).select();if(error){toast(error.message);return}saved=data||[]}await sb.from("rounds").update({status:"closed"}).eq("id",currentRound.id);currentRound.status="closed";roster=saved;renderAll();toast("Lista principal definida e confirmação fechada.")}
@@ -353,7 +447,7 @@ function renderDraw(){
     return
   }
   $("drawInfo").textContent="Nomes e times desta terça.";
-  $("teamsList").innerHTML=draw.teamsDetailed.map((team,i)=>`<div class="team"><div class="teamhead"><strong class="teamname">${esc(team.team_name||`Time ${i+1}`)}</strong><span class="tag">4 jogadores</span></div><div class="teamgrid">${team.members.map(p=>`<div class="chip">${esc(p.name)}${p.kind==="guest"?"<small>visitante</small>":""}</div>`).join("")}</div></div>`).join("");
+  $("teamsList").innerHTML=draw.teamsDetailed.map((team,i)=>`<div class="team"><div class="teamhead"><strong class="teamname">${esc(team.team_name||`Time ${i+1}`)}</strong><span class="tag">4 jogadores</span></div><div class="teamgrid">${team.members.map(p=>`<div class="chip personchip">${avatarForPlayer(p.player_id,p.name)}<div><div>${esc(p.name)}</div>${p.kind==="guest"?"<small>visitante</small>":""}</div></div>`).join("")}</div></div>`).join("");
 }
 
 
@@ -463,11 +557,23 @@ $("undoLastMatchBtn").onclick=async()=>{
 function renderLeaderboard(){
   const el=$("leaderboardList");if(!el)return;
   const rows=leaderboard.filter(x=>x.goals>0||x.wins>0);
-  el.innerHTML=rows.length?rows.map((p,i)=>`<div class="leader"><div class="rank">${i+1}</div><div><div class="name">${esc(p.name)}</div><div class="sub">jogador cadastrado</div></div><div class="metric"><b>${p.goals}</b><small>gols</small></div><div class="metric"><b>${p.wins}</b><small>vitórias</small></div></div>`).join(""):'<div class="empty">Ainda não há gols ou vitórias registrados.</div>';
+  el.innerHTML=rows.length?rows.map((p,i)=>`<div class="leader"><div class="rank">${i+1}</div><div class="leader-main">${avatarForPlayer(p.player_id,p.name)}<div><div class="name">${esc(p.name)}</div><div class="sub">jogador cadastrado</div></div></div><div class="metric"><b>${p.goals}</b><small>gols</small></div><div class="metric"><b>${p.wins}</b><small>vitórias</small></div></div>`).join(""):'<div class="empty">Ainda não há gols ou vitórias registrados.</div>';
 }
 
 /* ==================== PROFILE ==================== */
-function renderProfile(){const eligible=profileStats.eligible||0,attended=profileStats.attended||0,missed=Math.max(0,eligible-attended),rate=eligible?Math.round(attended/eligible*100):null;$("profileName").textContent=profile.name;$("attendanceRate").textContent=rate===null?"—":`${rate}%`;$("attendanceProgress").style.width=rate===null?"0%":`${rate}%`;$("attendedCount").textContent=attended;$("profileWins").textContent=profileStats.wins||0;$("profileGoals").textContent=profileStats.goals||0;$("eligibleCount").textContent=eligible;$("missedCount").textContent=missed}
+function renderProfile(){
+  const eligible=profileStats.eligible||0,attended=profileStats.attended||0,missed=Math.max(0,eligible-attended),rate=eligible?Math.round(attended/eligible*100):null;
+  $("profileName").textContent=profile.name;
+  const wrap=$("profileAvatarWrap");
+  if(wrap)wrap.innerHTML=avatarForPlayer(profile.id,profile.name,"avatar large").replace('class="avatar large"','id="profileAvatarPreview" class="avatar large"');
+  $("attendanceRate").textContent=rate===null?"—":`${rate}%`;
+  $("attendanceProgress").style.width=rate===null?"0%":`${rate}%`;
+  $("attendedCount").textContent=attended;
+  $("profileWins").textContent=profileStats.wins||0;
+  $("profileGoals").textContent=profileStats.goals||0;
+  $("eligibleCount").textContent=eligible;
+  $("missedCount").textContent=missed;
+}
 
 /* ==================== ADMIN ==================== */
 $("createNextRoundBtn").onclick=async()=>{
@@ -530,9 +636,9 @@ function renderAdmin(){
   $("closeListNowBtn").disabled=!currentRound||currentRound.status!=="open";
   $("autoListBtn").disabled=!currentRound||currentRound.status==="drawn";
 
-  $("adminPlayers").innerHTML=players.map(p=>`<div class="adminrow"><div class="pmain"><div class="avatar">${initials(p.name)}</div><div><div class="name">${esc(p.name)}</div><div class="sub">${ruleFor(p.id)?"separação interna ativa":"sem regra interna"}</div></div></div><button class="smallbtn" onclick="toggleRule('${p.id}')">${ruleFor(p.id)?"REMOVER":"SEPARAR"}</button></div>`).join("");
+  $("adminPlayers").innerHTML=players.map(p=>`<div class="adminrow"><div class="pmain">${avatarForPlayer(p.id,p.name)}<div><div class="name">${esc(p.name)}</div><div class="sub">${ruleFor(p.id)?"separação interna ativa":"sem regra interna"}</div></div></div><button class="smallbtn" onclick="toggleRule('${p.id}')">${ruleFor(p.id)?"REMOVER":"SEPARAR"}</button></div>`).join("");
 
-  $("editorPlayers").innerHTML=players.filter(p=>!p.is_admin).map(p=>`<div class="adminrow"><div class="pmain"><div class="avatar">${initials(p.name)}</div><div><div class="name">${esc(p.name)} ${p.is_editor?'<span class="rolebadge">EDITOR</span>':""}</div><div class="sub">${p.is_editor?"pode lançar placar e gols":"jogador comum"}</div></div></div><button class="smallbtn" onclick="toggleEditor('${p.id}')">${p.is_editor?"REMOVER EDITOR":"TORNAR EDITOR"}</button></div>`).join("");
+  $("editorPlayers").innerHTML=players.filter(p=>!p.is_admin).map(p=>`<div class="adminrow"><div class="pmain">${avatarForPlayer(p.id,p.name)}<div><div class="name">${esc(p.name)} ${p.is_editor?'<span class="rolebadge">EDITOR</span>':""}</div><div class="sub">${p.is_editor?"pode lançar placar e gols":"jogador comum"}</div></div></div><button class="smallbtn" onclick="toggleEditor('${p.id}')">${p.is_editor?"REMOVER EDITOR":"TORNAR EDITOR"}</button></div>`).join("");
 
   const main=liveEntries().filter(e=>e.status==="main");
   $("checkinList").innerHTML=main.length?main.map((e,i)=>{
